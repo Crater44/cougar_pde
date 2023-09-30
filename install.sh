@@ -20,21 +20,24 @@ execute_command "cp ./cougar_pde/.bashrc ." "getting .bashrc"
 execute_command "cp ./cougar_pde/.bash_prompt ." "getting .bash_prompt"
 execute_command "cp ./cougar_pde/.bash_aliases ." "getting .bash_aliases"
 execute_command "cp ./cougar_pde/.git-prompt.sh ." "getting .git-prompt.sh"
-execute_command "source ~/.git-prompt.sh" "source .git-prompt.sh"
 execute_command "rm .ashrc" "removing .ashrc"
 execute_command "rm .ash_history" "removing .ash_history"
 execute_command "touch .bash_history" "creating .bash_history"
-execute_command "apk add bash" "adding bash"
 execute_command "apk add bash-doc" "adding bash-doc"
 execute_command "apk add bash-completion" "adding bash-completion"
-execute_command "source /etc/bash/bash_completion.sh" "sourcing autocompletion"
-execute_command "bash" "login shell to bash"
+execute_command "apk add bash" "adding bash"
+execute_command "apk add shadow" "adding shadow"
+execute_command "chsh -s /bin/bash" "changing shell"
+execute_command "exec bash" "change and continue with bash"
 execute_command "sed -i 's#/bin/ash#/bin/bash#g' /etc/passwd" "Setup bash as default shell"
 execute_command "apk add mandoc man-pages" "adding man pages"
 execute_command "apk add sudo" "adding sudo"
 execute_command "apk add neofetch" "adding neofetch"
 execute_command "apk add cmake" "adding cmake"
 execute_command "apk add build-base" "adding linux building tools"
+execute_command "source /etc/bash/bash_completion.sh" "sourcing autocompletion"
+execute_command "source ~/.git-prompt.sh" "source .git-prompt.sh"
+execute_command "source ~/.bashrc" "source .bashrc"
 # docker
 execute_command "apk add docker" "adding docker"
 execute_command "apk add docker-compose" "adding docker-compose"
@@ -54,7 +57,7 @@ cd $HOME
 # fi
 # configure bash
 
-source ~/.bashrc
+# source ~/.bashrc
 
 # setup-alpine
 
