@@ -36,20 +36,13 @@ case "$TERM" in
 esac
 
 source ~/.bash_prompt
-
+source ~/.git-prompt
+source /etc/bash/bash_completion.sh
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 if [[ -f ~/.bash_aliases ]]; then
     . ~/.bash_aliases
-fi
-
-if ! shopt -oq posix; then
-  if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [[ -f /etc/bash_completion ]]; then
-    . /etc/bash_completion
-  fi
 fi
 
 LS_COLORS=$LS_COLORS:'di=1;31:'; export LS_COLORS
