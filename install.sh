@@ -27,59 +27,38 @@ execute_command "apk add bash-doc" "adding bash-doc"
 execute_command "apk add bash-completion" "adding bash-completion"
 execute_command "apk add bash" "adding bash"
 execute_command "apk add shadow" "adding shadow"
-execute_command "chsh -s /bin/bash" "changing shell"
-execute_command "exec bash" "change and continue with bash"
 execute_command "sed -i 's#/bin/ash#/bin/bash#g' /etc/passwd" "Setup bash as default shell"
 execute_command "apk add mandoc man-pages" "adding man pages"
 execute_command "apk add sudo" "adding sudo"
 execute_command "apk add neofetch" "adding neofetch"
 execute_command "apk add cmake" "adding cmake"
 execute_command "apk add build-base" "adding linux building tools"
-execute_command "source /etc/bash/bash_completion.sh" "sourcing autocompletion"
-execute_command "source ~/.git-prompt.sh" "source .git-prompt.sh"
-execute_command "source ~/.bashrc" "source .bashrc"
 # docker
 execute_command "apk add docker" "adding docker"
 execute_command "apk add docker-compose" "adding docker-compose"
 # neovim
 execute_command "apk add ripgrep" "adding ripgrep"
+execute_command "apk add gettext-dev" "adding gettext-dev"
 echo "installing neovim (it can take some minutes)"
 git clone https://github.com/neovim/neovim /tmp/neovim
 cd /tmp/neovim
-git checkout stable
-execute_command "make CMAKE_BUILD_TYPE=RelWithDebInfo" "setting neovim compiling options"
-execute_command "make install" "compiling neovim"
+# git checkout stable // won't work
+execute_command "make CMAKE_BUILD_TYPE=RelWithDebInfo" "compiling neovim"
+execute_command "make install" "installing neovim"
 # rm -rf /tmp/neovim
 cd $HOME
 # neovim custom setup
-# if [ -d ~/.config/nvim ] ; then
-  # execute_command "git clone https://github.com/Crater44/nvim-config.git ~/.config/nvim" "getting custom neovim setup"
-# fi
-# configure bash
+if [ -d ~/.config/nvim ] ; then
+    execute_command "git clone https://github.com/Crater44/nvim-config.git ~/.config/nvim" "getting custom neovim setup"
+fi
+execute_command "source ~/.bashrc" "source .bashrc"
 
-# source ~/.bashrc
-
-# setup-alpine
-
-echo "Run 'neofetch' to check out the details of the shell"
-
-
-###########################################################
-
-# echo -e "Welcome to your Personalized Develompent Environtment
-# .------..------..------..------..------..------.
-# |C.--. ||O.--. ||U.--. ||G.--. ||A.--. ||R.--. |
-# | :/\: || :\e[90m/\\e[0m: || (\/) || :/\: || (\/) || :\e[90m()\e[0m: |
-# | :\/: || (__) || :\/: || :\/: || :\/: || \e[90m()()\e[0m |
-# | '--'C|| '--'O|| '--'U|| '--'G|| '--'A|| '--'R|
-# \`------'\`------'\`------'\`------'\`------'\`------'
-# "
-
-
-# ssh config
-# execute_command "apk add openssh" "adding openssh"
-# execute_command "ssh-keygen -A" "setup ssh host keys"
-# if ! cat /etc/ssh/sshd_config | grep -q "PermitRootLogin yes"; then
-#   echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
-# fi
-
+echo -e "Welcome to your Personalized Develompent Environtment
+.------..------..------..------..------..------.
+|C.--. ||O.--. ||U.--. ||G.--. ||A.--. ||R.--. |
+| :/\: || :/\: || (\/) || :/\: || (\/) || :(): |
+| :\/: || (__) || :\/: || :\/: || :\/: || ()() |
+| '--'C|| '--'O|| '--'U|| '--'G|| '--'A|| '--'R|
+\`------'\`------'\`------'\`------'\`------'\`------'
+"
+echo -e "\nRun 'chsh -s /bin/bash and neofetch' to change shell and check out the details of the shell"
