@@ -19,7 +19,7 @@ execute_command "apk update" "updating repositories"
 execute_command "cp ./cougar_pde/.bashrc ." "getting .bashrc"
 execute_command "cp ./cougar_pde/.bash_prompt ." "getting .bash_prompt"
 execute_command "cp ./cougar_pde/.bash_aliases ." "getting .bash_aliases"
-execute_command "cp ./cougar_pde/.git-prompt.sh ." "getting .git-prompt.sh"
+execute_command "cp ./cougar_pde/.git-prompt ." "getting .git-prompt.sh"
 execute_command "rm .ashrc" "removing .ashrc"
 execute_command "rm .ash_history" "removing .ash_history"
 execute_command "touch .bash_history" "creating .bash_history"
@@ -52,13 +52,21 @@ if [ -d ~/.config/nvim ] ; then
     execute_command "git clone https://github.com/Crater44/nvim-config.git ~/.config/nvim" "getting custom neovim setup"
 fi
 execute_command "source ~/.bashrc" "source .bashrc"
+# desktop
+execute_command "apk add xfce4 xorg-server xfce4-terminal xfce4-screensaver lightdm-gtk-greeter dbus" "add desktop interface"
+execute_command "rc-service dbus start" "rc-service dbus start"
+execute_command "rc-update add dbus" "rc-update add dbus"
+execute_command "setup-devd udev" "setup-devd udev"
+execute_command "rc-service lightdm start" "rc-service lightdm start"
+execute_command "rc-update add lightdm" "rc-update add lightdm"
+execute_command "apk add elogind polkit-elogind" "adding reboot option"
 
-echo -e "Welcome to your Personalized Develompent Environtment
-.------..------..------..------..------..------.
-|C.--. ||O.--. ||U.--. ||G.--. ||A.--. ||R.--. |
-| :/\: || :/\: || (\/) || :/\: || (\/) || :(): |
-| :\/: || (__) || :\/: || :\/: || :\/: || ()() |
-| '--'C|| '--'O|| '--'U|| '--'G|| '--'A|| '--'R|
-\`------'\`------'\`------'\`------'\`------'\`------'
-"
-echo -e "\nRun 'chsh -s /bin/bash and neofetch' to change shell and check out the details of the shell"
+# echo -e "Welcome to your Personalized Develompent Environtment
+# .------..------..------..------..------..------.
+# |C.--. ||O.--. ||U.--. ||G.--. ||A.--. ||R.--. |
+# | :/\: || :/\: || (\/) || :/\: || (\/) || :(): |
+# | :\/: || (__) || :\/: || :\/: || :\/: || ()() |
+# | '--'C|| '--'O|| '--'U|| '--'G|| '--'A|| '--'R|
+# \`------'\`------'\`------'\`------'\`------'\`------'
+# "
+# echo -e "\nRun 'chsh -s /bin/bash and neofetch' to change shell and check out the details of the shell"
