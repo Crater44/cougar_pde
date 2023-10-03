@@ -1,72 +1,26 @@
-#!/bin/ash
-# execute commands with custom messages
-execute_command() {
-  local command="$1"
-  local description="$2"
-  echo "Executing: $command"
-  echo "$description..."
-  eval "$command" > /dev/null 2>&1
-  if [ $? -eq 0 ]; then
-    echo "Success: $description"
-  else
-    echo "Failed to $description"
-    echo "Error: $error_output"
+#!/bin/bash
+append_if_not_exists() {
+  local new_content="$1"
+  local file_path="$2"
+  if ! grep -qF "$new_content" "$file_path"; then
+    echo "$new_content" >> "$file_path"
   fi
 }
-# apk
-execute_command "sed -i '/^#.*community$/s/^#//' /etc/apk/repositories" "activating community repositories"
-execute_command "apk update" "updating repositories"
-execute_command "cp ./cougar_pde/.bashrc ." "getting .bashrc"
-execute_command "cp ./cougar_pde/.bash_prompt ." "getting .bash_prompt"
-execute_command "cp ./cougar_pde/.bash_aliases ." "getting .bash_aliases"
-execute_command "cp ./cougar_pde/.git-prompt ." "getting .git-prompt.sh"
-execute_command "rm .ashrc" "removing .ashrc"
-execute_command "rm .ash_history" "removing .ash_history"
-execute_command "touch .bash_history" "creating .bash_history"
-execute_command "apk add bash-doc" "adding bash-doc"
-execute_command "apk add bash-completion" "adding bash-completion"
-execute_command "apk add bash" "adding bash"
-execute_command "apk add shadow" "adding shadow"
-execute_command "sed -i 's#/bin/ash#/bin/bash#g' /etc/passwd" "Setup bash as default shell"
-execute_command "apk add mandoc man-pages" "adding man pages"
-execute_command "apk add sudo" "adding sudo"
-execute_command "apk add neofetch" "adding neofetch"
-execute_command "apk add cmake" "adding cmake"
-execute_command "apk add build-base" "adding linux building tools"
-# docker
-execute_command "apk add docker" "adding docker"
-execute_command "apk add docker-compose" "adding docker-compose"
-# neovim
-execute_command "apk add ripgrep" "adding ripgrep"
-execute_command "apk add gettext-dev" "adding gettext-dev"
-echo "installing neovim (it can take some minutes)"
-git clone https://github.com/neovim/neovim /tmp/neovim
-cd /tmp/neovim
-# git checkout stable // won't work
-execute_command "make CMAKE_BUILD_TYPE=RelWithDebInfo" "compiling neovim"
-execute_command "make install" "installing neovim"
-# rm -rf /tmp/neovim
-cd $HOME
-# neovim custom setup
-if [ -d ~/.config/nvim ] ; then
-    execute_command "git clone https://github.com/Crater44/nvim-config.git ~/.config/nvim" "getting custom neovim setup"
-fi
-execute_command "source ~/.bashrc" "source .bashrc"
-# desktop
-execute_command "apk add xfce4 xorg-server xfce4-terminal xfce4-screensaver lightdm-gtk-greeter dbus" "add desktop interface"
-execute_command "rc-service dbus start" "rc-service dbus start"
-execute_command "rc-update add dbus" "rc-update add dbus"
-execute_command "setup-devd udev" "setup-devd udev"
-execute_command "rc-service lightdm start" "rc-service lightdm start"
-execute_command "rc-update add lightdm" "rc-update add lightdm"
-execute_command "apk add elogind polkit-elogind" "adding reboot option"
 
-# echo -e "Welcome to your Personalized Develompent Environtment
-# .------..------..------..------..------..------.
-# |C.--. ||O.--. ||U.--. ||G.--. ||A.--. ||R.--. |
-# | :/\: || :/\: || (\/) || :/\: || (\/) || :(): |
-# | :\/: || (__) || :\/: || :\/: || :\/: || ()() |
-# | '--'C|| '--'O|| '--'U|| '--'G|| '--'A|| '--'R|
-# \`------'\`------'\`------'\`------'\`------'\`------'
-# "
-# echo -e "\nRun 'chsh -s /bin/bash and neofetch' to change shell and check out the details of the shell"
+append_if_not_exists "source ~/.bash_prompt" "~/.bashrc"
+append_if_not_exists "source ~/.git-prompt" "~/.bashrc"
+append_if_not_exists "LS_COLORS=\$LS_COLORS:'di=1;31:'; export LS_COLORS" "~/.bashrc"
+
+cp ./.bash_prompt ~/.bash_prompt
+cp ./.git-prompt ~/.git-prompt
+
+source ~/.bashrc
+
+echo "Ow yeah
+.------..------..------..------..------..------.     .------..------..------.
+|C.--. ||O.--. ||U.--. ||G.--. ||A.--. ||R.--. |.-.  |P.--. ||D.--. ||E.--. |
+| :/\: || :/\: || (\/) || :/\: || (\/) || :(): ((5)) | :/\: || :/\: || (\/) |
+| :\/: || :\/: || :\/: || :\/: || :\/: || ()() |'-.-.| (__) || (__) || :\/: |
+| '--'C|| '--'O|| '--'U|| '--'G|| '--'A|| '--'R| ((1)) '--'P|| '--'D|| '--'E|
+\`------'\`------'\`------'\`------'\`------'\`------'  '-'\`------'\`------'\`------'
+"
