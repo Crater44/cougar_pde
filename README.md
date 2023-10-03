@@ -32,4 +32,4 @@ bash install.sh
 ```
 rm -rf cougar_pde
 ```
-Gimme a start if you think it was easy.
+Gimme a start if you think that was easy to install.
