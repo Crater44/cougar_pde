@@ -81,11 +81,6 @@ set_prompt() {
     PS1+="$(font ${fg} ${layout})]$(font)"
     PS1+="$(font)${git_info}$(font)"
     PS1+="\n$(font ${fg} ${layout})└─▶$(font) "
-    
-    #PS1="┌─[$(font ${fg} ${red})${date} ${time} ${uptime}$(font)]"
-    #PS1+="──[$(font ${fg} ${red})${user}@$(font ${fg} ${red})${host}$(font)]"
-    #PS1+="──[$(font ${fg} ${red})${pwd}$(font)]$(font)${git_info}$(font)"
-    #PS1+="\n└─▶ "
 }
 
 GIT_PS1_SHOWUPSTREAM="auto"     # '<' behind, '>' ahead, '<>' diverged, '=' no difference
