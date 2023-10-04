@@ -3,13 +3,13 @@ append_if_not_exists() {
   local new_content="$1"
   local file_path="$2"
   if ! grep -qF "$new_content" "$file_path"; then
-    echo "$new_content" >> "$file_path"
+    echo -e "$new_content" >> "$file_path"
   fi
 }
 
-append_if_not_exists "source $HOME/.bash_prompt" "$HOME/.bashrc"
-append_if_not_exists "source $HOME/.git-prompt" "$HOME/.bashrc"
-append_if_not_exists "LS_COLORS=\$LS_COLORS:'di=1;31:'; export LS_COLORS" "$HOME/.bashrc"
+append_if_not_exists "source $HOME/.bash_prompt \n" "$HOME/.bashrc"
+append_if_not_exists "source $HOME/.git-prompt \n" "$HOME/.bashrc"
+append_if_not_exists "LS_COLORS=\$LS_COLORS:'di=1;31:'; export LS_COLORS \n" "$HOME/.bashrc"
 
 cp .bash_prompt $HOME/.bash_prompt
 cp .git-prompt $HOME/.git-prompt
