@@ -24,11 +24,19 @@ Step-by-step guide to install in a system like ubuntu (maybe other distros you'l
 ```
 git clone -b only_bash https://github.com/Crater44/cougar_pde.git
 ```
-2. Run the installation file
+2. Move into folder
+```
+cd cougar_pde
+```
+3. Run the installation file
 ```
 bash install.sh
 ```
-3. Clean up (optional)
+4. Refresh bash
+```
+source ~/.bashrc
+```
+5. Clean up (optional)
 ```
 rm -rf cougar_pde
 ```
