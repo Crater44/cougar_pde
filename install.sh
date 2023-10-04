@@ -7,16 +7,14 @@ append_if_not_exists() {
   fi
 }
 
-append_if_not_exists "source ~/.bash_prompt" "~/.bashrc"
-append_if_not_exists "source ~/.git-prompt" "~/.bashrc"
-append_if_not_exists "LS_COLORS=\$LS_COLORS:'di=1;31:'; export LS_COLORS" "~/.bashrc"
+append_if_not_exists "source $HOME/.bash_prompt" "$HOME/.bashrc"
+append_if_not_exists "source $HOME/.git-prompt" "$HOME/.bashrc"
+append_if_not_exists "LS_COLORS=\$LS_COLORS:'di=1;31:'; export LS_COLORS" "$HOME/.bashrc"
 
-cp ./.bash_prompt ~/.bash_prompt
-cp ./.git-prompt ~/.git-prompt
+cp .bash_prompt $HOME/.bash_prompt
+cp .git-prompt $HOME/.git-prompt
 
-source ~/.bashrc
-
-echo "Ow yeah
+echo "Now execute 'source $HOME/.bashrc'
 .------..------..------..------..------..------.     .------..------..------.
 |C.--. ||O.--. ||U.--. ||G.--. ||A.--. ||R.--. |.-.  |P.--. ||D.--. ||E.--. |
 | :/\: || :/\: || (\/) || :/\: || (\/) || :(): ((5)) | :/\: || :/\: || (\/) |
