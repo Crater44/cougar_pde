@@ -34,10 +34,10 @@ bash install.sh
 ```
 4. Refresh bash
 ```
-source ~/.bashrc
+source $HOME/.bashrc
 ```
 5. Clean up (optional)
 ```
-rm -rf cougar_pde
+cd ../ ; rm -rf cougar_pde
 ```
 #### Gimme a start if you think that was easy to install.
