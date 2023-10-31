@@ -20,9 +20,9 @@ Be careful to clone the right branch.
 ## Install
 Step-by-step guide to install in a system like ubuntu (maybe other distros you'll have to tinker it a bit)
 
-1. Clone the branch only_bash
+1. Clone the branch bash_adn_atom
 ```
-git clone -b only_bash https://github.com/Crater44/cougar_pde.git
+git clone -b bash_and_atom https://github.com/Crater44/cougar_pde.git
 ```
 2. Move into folder
 ```
